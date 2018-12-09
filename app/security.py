@@ -9,10 +9,11 @@ auth = HTTPBasicAuth()
 
 @auth.get_password
 def get_password(username):
-    if username == app.config['USERNAME']:
-        return app.config['PASSWORD']
+    if username in app.config['USERS']:
+        return app.config['USERS'][username]
     return None
 
 @auth.error_handler
 def unauthorized():
     return abort(401)
+    
