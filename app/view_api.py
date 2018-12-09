@@ -2,9 +2,11 @@ from flask import request, send_from_directory, abort
 
 from . import app
 from .my_hash import file_hash
+from .security import auth
 
 
 @app.route('/tests/<filename>')
+@auth.login_required
 def check_version(filename):
     tests_folder = app.config['TESTS_FOLDER']
     req_file = tests_folder / filename
